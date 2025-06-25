@@ -35,32 +35,61 @@ some_fact: "all default fact
 ![2](https://github.com/Foxbeerxxx/work_in_playbook/blob/main/img/img2.png)
 
 
----
+7. `Создаю Dockerfile в корне проекта:`
+```
+FROM ubuntu:22.04
 
-### Задание 2
+RUN apt-get update && \
+    apt-get install -y \
+    ansible \
+    python3 \
+    ssh \
+    sudo && \
+    rm -rf /var/lib/apt/lists/*
 
-`Приведите ответ в свободной форме........`
+WORKDIR /ansible
+COPY . .
 
-1. `Заполните здесь этапы выполнения, если требуется ....`
-2. `Заполните здесь этапы выполнения, если требуется ....`
-3. `Заполните здесь этапы выполнения, если требуется ....`
-4. `Заполните здесь этапы выполнения, если требуется ....`
-5. `Заполните здесь этапы выполнения, если требуется ....`
-6. 
+CMD ["sleep", "infinity"]
+```
+8. `Сборка образа`
 
 ```
-Поле для вставки кода...
-....
-....
-....
-....
+docker build -t ansible-lab .
+```
+9. `Запуск контейнера`
+
+```
+docker run -d --name ansible-test -v $(pwd):/ansible ansible-lab
 ```
 
-`При необходимости прикрепитe сюда скриншоты
-![Название скриншота 2](ссылка на скриншот 2)`
+10. `Настройка инвентаря ,создаею inventory/docker.yml`
 
+```
+all:
+  hosts:
+    ansible-test:
+      ansible_connection: local
+      some_fact: "docker_test_value"
+```
+![3](https://github.com/Foxbeerxxx/work_in_playbook/blob/main/img/img3.png)
 
----
+11. `Проверка окружения`
+
+```
+docker exec -it ansible-test ansible --version
+
+```
+![4](https://github.com/Foxbeerxxx/work_in_playbook/blob/main/img/img4.png)
+
+12. `Копирование prod.yml в контейнер`
+
+```
+docker cp inventory/prod.yml ansible-test:/ansible/inventory/
+```
+
+![5](https://github.com/Foxbeerxxx/work_in_playbook/blob/main/img/img5.png)
+
 
 ### Задание 3
 

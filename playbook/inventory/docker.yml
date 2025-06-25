@@ -1,0 +1,5 @@
+all:
+  hosts:
+    ansible-test:
+      ansible_connection: local
+      some_fact: "docker_test_value"
