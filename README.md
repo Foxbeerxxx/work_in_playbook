@@ -10,21 +10,29 @@
   ```
 2. `Пробую запускать и смотрю вывод ansible-playbook -i inventory/test.yml site.yml`
 
-3. `Заполните здесь этапы выполнения, если требуется ....`
-4. `Заполните здесь этапы выполнения, если требуется ....`
-5. `Заполните здесь этапы выполнения, если требуется ....`
-6. 
+![1](https://github.com/Foxbeerxxx/work_in_playbook/blob/main/img/img1.png)
+
+3. `В вашем случае some_fact переопределяется в inventory/test.yml, но по заданию нужно найти его в group_vars`
+4. `Изменяю group_vars/all/examp.yml`
 
 ```
-Поле для вставки кода...
-....
-....
-....
-....
+---
+some_fact: "all default fact 
 ```
+5. `Закомментирую some_fact в inventory/test.yml`
 
-`При необходимости прикрепитe сюда скриншоты
-![Название скриншота 1](ссылка на скриншот 1)`
+```
+---
+  inside:
+    hosts:
+      localhost:
+        ansible_connection: local
+        #some_fact: "my_test_value" 
+
+```
+6. ` Проверяю ansible-playbook -i inventory/test.yml site.yml`
+
+![2](https://github.com/Foxbeerxxx/work_in_playbook/blob/main/img/img2.png)
 
 
 ---
