@@ -91,15 +91,48 @@ docker cp inventory/prod.yml ansible-test:/ansible/inventory/
 ![5](https://github.com/Foxbeerxxx/work_in_playbook/blob/main/img/img5.png)
 
 
-### Задание 3
 
-`Приведите ответ в свободной форме........`
 
-1. `Заполните здесь этапы выполнения, если требуется ....`
-2. `Заполните здесь этапы выполнения, если требуется ....`
-3. `Заполните здесь этапы выполнения, если требуется ....`
-4. `Заполните здесь этапы выполнения, если требуется ....`
-5. `Заполните здесь этапы выполнения, если требуется ....`
+13. `Делаю по заданию`
+```
+Добавьте факты в group_vars каждой из групп хостов так, чтобы для some_fact получились значения: для deb — deb default fact, для el — el default fact
+
+Получилось:
+some_fact: "deb default fact" 
+some_fact: "el default fact"
+some_fact: "all default fact"
+```
+
+14. `Копирую в контейнер`
+```
+docker cp inventory/prod.yml ansible-test:/ansible/inventory/
+```
+
+15. `Запускаю результат`
+```
+docker exec -it ansible-test ansible-playbook -i inventory/prod.yml site.yml
+```
+16. `Шифрование файлов с переменными`
+```
+# Шифруем файл для группы deb
+ansible-vault encrypt group_vars/deb/examp.yml --ask-vault-pass
+# Вводим пароль: netology
+
+# Шифруем файл для группы el
+ansible-vault encrypt group_vars/el/examp.yml --ask-vault-pass
+# Вводим пароль: netology
+```
+![6](https://github.com/Foxbeerxxx/work_in_playbook/blob/main/img/img6.png)
+
+17. `Теперь при запуске playbook нужно указать пароль от vault:`
+```
+ansible-playbook -i inventory/prod.yml site.yml --ask-vault-pass
+# Вводим пароль: netology
+```
+![7](https://github.com/Foxbeerxxx/work_in_playbook/blob/main/img/img7.png)
+
+![8](https://github.com/Foxbeerxxx/work_in_playbook/blob/main/img/img8.png)
+
 6. 
 
 ```
