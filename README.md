@@ -133,37 +133,34 @@ ansible-playbook -i inventory/prod.yml site.yml --ask-vault-pass
 
 ![8](https://github.com/Foxbeerxxx/work_in_playbook/blob/main/img/img8.png)
 
-6. 
+18. `Просмотр списка плагинов подключения`
 
 ```
-Поле для вставки кода...
-....
-....
-....
-....
+ansible-doc -t connection -l
+```
+![9](https://github.com/Foxbeerxxx/work_in_playbook/blob/main/img/img9.png)
+
+19. `Для работы на control node (т.е. для выполнения задач локально) подходят`
+```
+Для работы на control node (т.е. для выполнения задач локально) подходят
+- local (будем использовать) - Выполняет команды непосредственно на control node
+- community.general.chroot - Для работы с chroot-окружением
+- ansible.netcommon.persistent - Для постоянных соединений через Unix-сокеты
 ```
 
-`При необходимости прикрепитe сюда скриншоты
-![Название скриншота](ссылка на скриншот)`
-
-### Задание 4
-
-`Приведите ответ в свободной форме........`
-
-1. `Заполните здесь этапы выполнения, если требуется ....`
-2. `Заполните здесь этапы выполнения, если требуется ....`
-3. `Заполните здесь этапы выполнения, если требуется ....`
-4. `Заполните здесь этапы выполнения, если требуется ....`
-5. `Заполните здесь этапы выполнения, если требуется ....`
-6. 
-
+20. `Проверка работы плагина local`
 ```
-Поле для вставки кода...
-....
-....
-....
-....
+Добавляю в inventory/prod.yml
+local:
+      hosts:
+        localhost:
+          ansible_connection: local
+          some_fact: "local_value"
 ```
 
-`При необходимости прикрепитe сюда скриншоты
-![Название скриншота](ссылка на скриншот)`
+21. `И проверяю`
+```
+ansible-playbook -i inventory/prod.yml site.yml --ask-vault-pass
+```
+![10](https://github.com/Foxbeerxxx/work_in_playbook/blob/main/img/img10.png)
+

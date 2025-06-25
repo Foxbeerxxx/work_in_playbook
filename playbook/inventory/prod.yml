@@ -7,3 +7,9 @@
     hosts:
       ubuntu:
         ansible_connection: local
+        
+  local:  # Новая группа
+    hosts:
+      localhost:
+        ansible_connection: local  # Ключевой параметр!
+        some_fact: "local_value"   # Пример переменной (опционально)
