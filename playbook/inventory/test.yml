@@ -1,0 +1,6 @@
+---
+  inside:
+    hosts:
+      localhost:
+        ansible_connection: local
+        some_fact: "my_test_value" 
